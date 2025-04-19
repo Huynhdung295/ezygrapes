@@ -1,0 +1,7 @@
+$pfx: 'gjs-';
+
+.#{$pfx}btn-edit-html,
+.#{$pfx}btn-import {
+  padding: 5px 10px 5px 10px;
+  margin-top: 5px;
+}
