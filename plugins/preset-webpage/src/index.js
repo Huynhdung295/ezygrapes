@@ -14,13 +14,13 @@ import pluginForms from './components/forms';
 import pluginAviary from './components/aviary';
 import pluginFilestack from './components/filestack';
 import pluginFontIcon from './components/font-icon';
+import pluginCardSlider from './components/card-slider';
 
 export default ezygrapes.plugins.add('gjs-preset-webpage', (editor, opts = {}) => {
-
   i18n.addI18nMessages(editor);
 
   let config = {
-    category: "basic",
+    category: 'basic',
 
     // Import description inside import modal
     modalImportLabel: '',
@@ -74,6 +74,8 @@ export default ezygrapes.plugins.add('gjs-preset-webpage', (editor, opts = {}) =
     // By setting this option to `false` will avoid loading the plugin
     fontIconOpts: {},
 
+    cardSliderOpts: {},
+
     ...opts,
   };
 
@@ -85,7 +87,8 @@ export default ezygrapes.plugins.add('gjs-preset-webpage', (editor, opts = {}) =
     exportOpts,
     aviaryOpts,
     filestackOpts,
-    fontIconOpts
+    fontIconOpts,
+    cardSliderOpts,
   } = config;
 
   // Load plugins
@@ -97,6 +100,7 @@ export default ezygrapes.plugins.add('gjs-preset-webpage', (editor, opts = {}) =
   aviaryOpts && pluginAviary(editor, aviaryOpts);
   filestackOpts && pluginFilestack(editor, filestackOpts);
   fontIconOpts && pluginFontIcon(editor, fontIconOpts);
+  cardSliderOpts && pluginCardSlider(editor, cardSliderOpts);
 
   // Load components
   components(editor, config);
@@ -112,4 +116,4 @@ export default ezygrapes.plugins.add('gjs-preset-webpage', (editor, opts = {}) =
 
   // Load methods
   methods(editor, config);
-})
+});
