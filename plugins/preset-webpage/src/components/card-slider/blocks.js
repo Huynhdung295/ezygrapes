@@ -2,29 +2,39 @@ import C from './consts';
 import styleSlider from './styles';
 
 const sliders = [
-  { src: '', alt: '', offset: -260, zIndex: 6, scale: 0.8 },
-  { src: '', alt: '', offset: -145, zIndex: 8, scale: 0.8 },
-  { src: '', alt: '', offset: 0, zIndex: 10, scale: 1.2, active: true },
-  { src: '', alt: '', offset: 145, zIndex: 8, scale: 0.8 },
-  { src: '', alt: '', offset: 260, zIndex: 6, scale: 0.8 },
+  { src: '', alt: 'Card 1', href: '' },
+  { src: '', alt: 'Card 2', href: '' },
+  { src: '', alt: 'Card 3', href: '' },
+  { src: '', alt: 'Card 4', href: '' },
+  { src: '', alt: 'Card 5', href: '' },
 ];
 
-const generateSlides = () =>
+const generateDesktopSlides = () =>
   sliders
     .map(
-      ({ src, offset, zIndex, scale, active, alt }) => `
-    <div class="card-slider-slide ${active ? 'active' : ''}" 
-         data-gjs-type="card-slider-slide"
-         style="transform: translate(calc(-50% + ${offset}px), -50%) scale(${scale}); z-index: ${zIndex};">
-      <img src="${src}" alt="${alt}" />
-    </div>
+      ({ src, alt, href }) => `
+    <a class="card-slider-slide" href="${href}" target="_self" data-gjs-type="card-slider-slide">
+      <img src="${src}" alt="${alt}" data-gjs-type="image" />
+    </a>
   `,
+    )
+    .join('');
+
+const generateMobileSlides = () =>
+  sliders
+    .map(
+      ({ src, alt, href }) => `
+        <div class="swiper-slide">
+          <a class="card-slider-slide" href="${href}" target="_self" data-gjs-type="card-slider-slide">
+            <img src="${src}" alt="${alt}" data-gjs-type="image" />
+          </a>
+        </div>
+      `,
     )
     .join('');
 
 export default (editor) => {
   const bm = editor.BlockManager;
-
   editor.addStyle(styleSlider);
 
   bm.add(C.ref, {
@@ -32,12 +42,22 @@ export default (editor) => {
     category: editor.I18n.t(C.category),
     attributes: { class: 'fa fa-images' },
     content: `
-      <div class="${C.clsPfx}">
-        <div class="slider-top-text">A Series Of Themed Stories</div>
-        <div class="slider-wrapper">
-          ${generateSlides()}
+      <div class="slider-trigger-area">
+       <div class="slider-top">
+         <h2>Explore Our Series</h2>
+         <h6>Discover the latest trends and insights</h6>
+      </div>
+        <div class="slider-wrapper-desktop">
+          ${generateDesktopSlides()}
         </div>
-        <div class="slider-bottom-button">Explore Series</div>
+        <div class="swiper card-swiper-custom">
+          <div class="swiper-wrapper">
+            ${generateMobileSlides()}
+          </div>
+        </div>
+        <div class="slider-bottom-button">
+          <a href="#" target="_self" data-gjs-type="card-slider-slide">Explore Series</a>
+        </div>
       </div>
     `,
   });
