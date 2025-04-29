@@ -1,4 +1,4 @@
-import genHtml from '../utils/gen-html';
+import generatePageFullHtml from '../utils/generate-page-full-html';
 
 export default (editor, config) => {
   return {
@@ -6,7 +6,7 @@ export default (editor, config) => {
       const html = editor.getHtml();
       const css = editor.getCss();
       const js = editor.getJs();
-      const exportedHtml = genHtml(html, css, js);
+      const exportedHtml = generatePageFullHtml(html, css, js);
 
       const blob = new Blob([exportedHtml], { type: 'text/html' });
       const blobUrl = URL.createObjectURL(blob);

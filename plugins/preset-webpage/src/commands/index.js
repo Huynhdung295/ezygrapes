@@ -2,7 +2,6 @@ import editHtml from './edit-html';
 import openImport from './open-import';
 import toggleBorder from './toggle-border';
 import previewHtml from './preview-html';
-import previewLive from './preview-live';
 
 import {
   cmdEditHtml,
@@ -13,7 +12,6 @@ import {
   cmdClear,
   cmdToggleBorder,
   cmdPreviewHtml,
-  cmdPreviewLive,
 } from './../consts';
 
 export default (editor, config) => {
@@ -28,5 +26,4 @@ export default (editor, config) => {
   cm.add(cmdClear, (e) => confirm(txtConfirm) && e.runCommand('core:canvas-clear'));
   cm.add(cmdToggleBorder, toggleBorder(editor, config));
   cm.add(cmdPreviewHtml, previewHtml(editor, config));
-  cm.add(cmdPreviewLive, previewLive(editor, config));
 };

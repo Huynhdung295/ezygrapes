@@ -7,7 +7,6 @@ import {
   cmdClear,
   cmdToggleBorder,
   cmdPreviewHtml,
-  cmdPreviewLive
 } from './../consts';
 
 export default (editor, config) => {
@@ -59,11 +58,6 @@ export default (editor, config) => {
           id: cmdPreviewHtml,
           className: 'fa-solid fa-up-right-from-square',
           command: (e) => e.runCommand(cmdPreviewHtml),
-        },
-        {
-          id: cmdPreviewLive,
-          className: 'fa-solid fa-expand',
-          command: (e) => e.runCommand(cmdPreviewLive),
         },
         {
           id: 'editHtml',
