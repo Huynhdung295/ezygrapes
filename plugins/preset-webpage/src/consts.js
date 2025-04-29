@@ -6,5 +6,4 @@ cmdDeviceTablet = 'set-device-tablet',
 cmdDeviceMobile = 'set-device-mobile',
 cmdClear = 'canvas-clear',
 cmdToggleBorder = 'toggler-boder',
-cmdPreviewHtml = 'preview-html',
-cmdPreviewLive = 'preview-live';
+cmdPreviewHtml = 'preview-html';
