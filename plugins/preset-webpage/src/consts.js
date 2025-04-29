@@ -7,5 +7,4 @@ cmdDeviceMobile = 'set-device-mobile',
 cmdClear = 'canvas-clear',
 cmdToggleBorder = 'toggler-boder',
 cmdPreviewHtml = 'preview-html',
-cmdExportHtml = 'export-html',
 cmdPreviewLive = 'preview-live';

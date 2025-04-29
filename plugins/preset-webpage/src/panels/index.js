@@ -7,7 +7,6 @@ import {
   cmdClear,
   cmdToggleBorder,
   cmdPreviewHtml,
-  cmdExportHtml,
   cmdPreviewLive
 } from './../consts';
 
@@ -55,11 +54,6 @@ export default (editor, config) => {
           id: expt,
           className: 'fas fa-code',
           command: (e) => e.runCommand(expt),
-        },
-        {
-          id: cmdExportHtml,
-          className: 'fas fa-file-export',
-          command: (e) => e.runCommand(cmdExportHtml),
         },
         {
           id: cmdPreviewHtml,

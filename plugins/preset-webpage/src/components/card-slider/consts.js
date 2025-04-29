@@ -3,7 +3,7 @@ const PREFIX = 'card-slider';
 export default {
   pluginId: 'gjs-card-slider',
   ref: PREFIX,
-  label: 'Card Slider',
+  label: 'card-slider',
   clsPfx: PREFIX,
   category: 'extra',
 };
