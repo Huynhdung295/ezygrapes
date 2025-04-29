@@ -5,13 +5,16 @@ import {
   cmdDeviceTablet,
   cmdDeviceMobile,
   cmdClear,
-  cmdToggleBorder
+  cmdToggleBorder,
+  cmdPreviewHtml,
+  cmdExportHtml,
+  cmdPreviewLive
 } from './../consts';
 
 export default (editor, config) => {
   const pn = editor.Panels;
   const eConfig = editor.getConfig();
-  const swv = 'sw-visibility';
+  const swv = 'sw-visibility';
   const expt = 'export-template';
   const osm = 'open-sm';
   const otm = 'open-tm';
@@ -22,107 +25,146 @@ export default (editor, config) => {
 
   eConfig.showDevices = 0;
 
-  pn.getPanels().reset([{
-    id: 'commands',
-    buttons: [{}],
-  },{
-    id: 'options',
-    buttons: [{
-      id: swv,
-      command: swv,
-      context: swv,
-      className: 'far fa-square',
-    },{
-      id: prv,
-      context: prv,
-      command: e => e.runCommand(prv),
-      className: 'fas fa-eye',
-    },{
-      id: ful,
-      command: ful,
-      context: ful,
-      className: 'fas fa-arrows-alt',
-    },{
-      id: expt,
-      className: 'fas fa-code',
-      command: e => e.runCommand(expt),
-    },{
-      id: 'editHtml',
-      className: 'fa fa-edit',
-      command: e => e.runCommand(cmdEditHtml),
-    },{
-      id: 'undo',
-      className: 'fas fa-undo',
-      command: e => e.runCommand('core:undo'),
-    },{
-      id: 'redo',
-      className: 'fas fa-redo',
-      command: e => e.runCommand('core:redo'),
-    },{
-      id: cmdImport,
-      className: 'fas fa-download',
-      command: e => e.runCommand(cmdImport),
-    },{
-      id: cmdClear,
-      className: 'fas fa-trash',
-      command: e => e.runCommand(cmdClear),
+  pn.getPanels().reset([
+    {
+      id: 'commands',
+      buttons: [{}],
     },
     {
-      id: cmdToggleBorder,
-      className: 'fa-solid fa-border-none',
-      command: e => e.runCommand(cmdToggleBorder),
-    }],
-  },{
-    id: 'views',
-    buttons  : [{
-      id: osm,
-      command: osm,
-      active: true,
-      className: 'fas fa-paint-brush',
-    },{
-      id: otm,
-      command: otm,
-      className: 'fas fa-cog',
-    },{
-      id: ola,
-      command: ola,
-      className: 'fas fa-bars',
-    },{
-      id: obl,
-      command: obl,
-      className: 'fas fa-th-large',
-    }],
-  }]);
+      id: 'options',
+      buttons: [
+        {
+          id: swv,
+          command: swv,
+          context: swv,
+          className: 'far fa-square',
+        },
+        {
+          id: prv,
+          context: prv,
+          command: (e) => e.runCommand(prv),
+          className: 'fas fa-eye',
+        },
+        {
+          id: ful,
+          command: ful,
+          context: ful,
+          className: 'fas fa-arrows-alt',
+        },
+        {
+          id: expt,
+          className: 'fas fa-code',
+          command: (e) => e.runCommand(expt),
+        },
+        {
+          id: cmdExportHtml,
+          className: 'fas fa-file-export',
+          command: (e) => e.runCommand(cmdExportHtml),
+        },
+        {
+          id: cmdPreviewHtml,
+          className: 'fa-solid fa-glasses',
+          command: (e) => e.runCommand(cmdPreviewHtml),
+        },
+        {
+          id: cmdPreviewLive,
+          className: 'fa-solid fa-expand',
+          command: (e) => e.runCommand(cmdPreviewLive),
+        },
+        {
+          id: 'editHtml',
+          className: 'fa fa-edit',
+          command: (e) => e.runCommand(cmdEditHtml),
+        },
+        {
+          id: 'undo',
+          className: 'fas fa-undo',
+          command: (e) => e.runCommand('core:undo'),
+        },
+        {
+          id: 'redo',
+          className: 'fas fa-redo',
+          command: (e) => e.runCommand('core:redo'),
+        },
+        {
+          id: cmdImport,
+          className: 'fas fa-download',
+          command: (e) => e.runCommand(cmdImport),
+        },
+        {
+          id: cmdClear,
+          className: 'fas fa-trash',
+          command: (e) => e.runCommand(cmdClear),
+        },
+        {
+          id: cmdToggleBorder,
+          className: 'fa-solid fa-border-none',
+          command: (e) => e.runCommand(cmdToggleBorder),
+        },
+      ],
+    },
+    {
+      id: 'views',
+      buttons: [
+        {
+          id: osm,
+          command: osm,
+          active: true,
+          className: 'fas fa-paint-brush',
+        },
+        {
+          id: otm,
+          command: otm,
+          className: 'fas fa-cog',
+        },
+        {
+          id: ola,
+          command: ola,
+          className: 'fas fa-bars',
+        },
+        {
+          id: obl,
+          command: obl,
+          className: 'fas fa-th-large',
+        },
+      ],
+    },
+  ]);
 
   // Add devices buttons
-  const panelDevices = pn.addPanel({id: 'devices-c'});
-  panelDevices.get('buttons').add([{
-    id: cmdDeviceDesktop,
-    command: cmdDeviceDesktop,
-    className: 'fas fa-desktop',
-    active: 1,
-  },{
-    id: cmdDeviceTablet,
-    command: cmdDeviceTablet,
-    className: 'fas fa-tablet-alt',
-  },{
-    id: cmdDeviceMobile,
-    command: cmdDeviceMobile,
-    className: 'fas fa-mobile-alt',
-  }]);
+  const panelDevices = pn.addPanel({ id: 'devices-c' });
+  panelDevices.get('buttons').add([
+    {
+      id: cmdDeviceDesktop,
+      command: cmdDeviceDesktop,
+      className: 'fas fa-desktop',
+      active: 1,
+    },
+    {
+      id: cmdDeviceTablet,
+      command: cmdDeviceTablet,
+      className: 'fas fa-tablet-alt',
+    },
+    {
+      id: cmdDeviceMobile,
+      command: cmdDeviceMobile,
+      className: 'fas fa-mobile-alt',
+    },
+  ]);
 
   const openBl = pn.getButton('views', obl);
   editor.on('load', () => openBl && openBl.set('active', 1));
 
   // On component change show the Style Manager
-  config.showStylesOnChange && editor.on('component:selected', () => {
-    const openSmBtn = pn.getButton('views', osm);
-    const openLayersBtn = pn.getButton('views', ola);
+  config.showStylesOnChange &&
+    editor.on('component:selected', () => {
+      const openSmBtn = pn.getButton('views', osm);
+      const openLayersBtn = pn.getButton('views', ola);
 
-    // Don't switch when the Layer Manager is on or
-    // there is no selected component
-    if ((!openLayersBtn || !openLayersBtn.get('active')) && editor.getSelected()) {
-      openSmBtn && openSmBtn.set('active', 1);
-    }
-  });
-}
+      // Don't switch when the Layer Manager is on or
+      // there is no selected component
+      if ((!openLayersBtn || !openLayersBtn.get('active')) && editor.getSelected()) {
+        openSmBtn && openSmBtn.set('active', 1);
+      }
+    });
+};

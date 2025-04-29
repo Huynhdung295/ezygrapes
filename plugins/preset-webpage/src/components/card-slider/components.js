@@ -74,8 +74,9 @@ export default (editor) => {
             new Swiper('.card-swiper-custom', {
               effect: 'cards',
               grabCursor: true,
-              initialSlide: 0,
+              initialSlide: 2,
               loop: true,
+              loopAdditionalSlides: 1,
               speed: 600,
               cardsEffect: {
                 perSlideRotate: 0,
