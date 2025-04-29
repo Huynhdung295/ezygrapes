@@ -21,9 +21,9 @@ export default `
 .card-slider-slide {
   position: relative;
   width: calc(100% / 3);
-  height: calc(100vw / 2);
-  max-width: 460px;
-  max-height: 540px;
+  max-width: 400px;
+  min-width: 250px;
+  aspect-ratio: 3 / 4; 
   margin-left: -120px;
   margin-right: -60px;
   padding: 10px;
@@ -38,7 +38,6 @@ export default `
   align-items: center;
   justify-content: center;
 }
-
 .card-slider-slide:first-child {
   margin-left: 0;
 }
@@ -55,6 +54,7 @@ export default `
   height: 100%;
   object-fit: cover;
   border-radius: 15px;
+  background-color: #eee;
 }
 
 .card-slider-slide.hovering {
@@ -125,4 +125,14 @@ export default `
     border-radius: 20px;
   }
 }
+// Responsive for Slider 
+@media (max-width: 876px) {
+.card-slider-slide {
+    margin-left: -85px;
+ }
+}
+ @media (max-width: 680px){
+ .card-slider-slide {
+    margin-left: -120px;
+ }
 `;
