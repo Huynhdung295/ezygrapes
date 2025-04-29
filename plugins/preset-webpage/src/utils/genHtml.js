@@ -1,23 +1,4 @@
-const defaultJs = `
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof Swiper !== 'undefined') {
-      new Swiper('.card-swiper-custom', {
-        effect: 'cards',
-        grabCursor: true,
-        initialSlide: 2,
-        loop: true,
-        loopAdditionalSlides: 1,
-        speed: 600,
-        cardsEffect: {
-          perSlideRotate: 0,
-          perSlideOffset: 15,
-        },
-      });
-    }
-  });
-`.trim();
-
-const genHtml = (html, css) =>
+const genHtml = (html, css, js) =>
   `
   <!DOCTYPE html>
   <html lang="en">
@@ -36,7 +17,7 @@ const genHtml = (html, css) =>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
-    <script>${defaultJs}</script>
+    <script>${js}</script>
   </body>
   </html>
 `.trim();

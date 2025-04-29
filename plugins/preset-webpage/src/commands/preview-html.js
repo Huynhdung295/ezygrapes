@@ -5,7 +5,8 @@ export default (editor, config) => {
     run(editor) {
       const html = editor.getHtml();
       const css = editor.getCss();
-      const exportedHtml = genHtml(html, css);
+      const js = editor.getJs();
+      const exportedHtml = genHtml(html, css, js);
 
       const blob = new Blob([exportedHtml], { type: 'text/html' });
       const blobUrl = URL.createObjectURL(blob);
