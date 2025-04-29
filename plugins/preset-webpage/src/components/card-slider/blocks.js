@@ -36,9 +36,8 @@ const generateMobileSlides = () =>
 export default (editor) => {
   const bm = editor.BlockManager;
   editor.addStyle(styleSlider);
-
   bm.add(C.ref, {
-    label: C.label,
+    label: editor.I18n.t(C.label),
     category: editor.I18n.t(C.category),
     attributes: { class: 'fa fa-images' },
     content: `
