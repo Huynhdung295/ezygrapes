@@ -1,12 +1,7 @@
-import generatePageFullHtml from '../utils/generate-page-full-html';
-
 export default (editor, config) => {
   return {
     run(editor) {
-      const html = editor.getHtml();
-      const css = editor.getCss();
-      const js = editor.getJs();
-      const exportedHtml = generatePageFullHtml(html, css, js);
+      const exportedHtml = editor.generatePageFullHtml();
 
       const blob = new Blob([exportedHtml], { type: 'text/html' });
       const blobUrl = URL.createObjectURL(blob);
