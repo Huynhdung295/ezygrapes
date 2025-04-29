@@ -57,7 +57,7 @@ export default (editor, config) => {
         },
         {
           id: cmdPreviewHtml,
-          className: 'fa-solid fa-glasses',
+          className: 'fa-solid fa-up-right-from-square',
           command: (e) => e.runCommand(cmdPreviewHtml),
         },
         {
