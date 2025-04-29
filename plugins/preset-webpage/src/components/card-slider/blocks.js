@@ -2,18 +2,18 @@ import C from './consts';
 import styleSlider from './styles';
 
 const sliders = [
-  { src: '', alt: 'Card 1', href: '' },
-  { src: '', alt: 'Card 2', href: '' },
-  { src: '', alt: 'Card 3', href: '' },
-  { src: '', alt: 'Card 4', href: '' },
-  { src: '', alt: 'Card 5', href: '' },
+  { src: '', alt: 'Card 1', href: '', id: 1 },
+  { src: '', alt: 'Card 2', href: '', id: 2 },
+  { src: '', alt: 'Card 3', href: '', id: 3 },
+  { src: '', alt: 'Card 4', href: '', id: 4 },
+  { src: '', alt: 'Card 5', href: '', id: 5 },
 ];
 
 const generateDesktopSlides = () =>
   sliders
     .map(
-      ({ src, alt, href }) => `
-    <a class="card-slider-slide" href="${href}" target="_self" data-gjs-type="card-slider-slide">
+      ({ src, alt, href, id }) => ` 
+    <a id="slide-${id}" class="card-slider-slide" href="${href}" target="_self" data-gjs-type="card-slider-slide">
       <img src="${src}" alt="${alt}" data-gjs-type="image" />
     </a>
   `,
@@ -23,9 +23,9 @@ const generateDesktopSlides = () =>
 const generateMobileSlides = () =>
   sliders
     .map(
-      ({ src, alt, href }) => `
+      ({ src, alt, href, id }) => `
         <div class="swiper-slide">
-          <a class="card-slider-slide" href="${href}" target="_self" data-gjs-type="card-slider-slide">
+          <a id="slide-${id}" class="card-slider-slide" href="${href}" target="_self" data-gjs-type="card-slider-slide">
             <img src="${src}" alt="${alt}" data-gjs-type="image" />
           </a>
         </div>

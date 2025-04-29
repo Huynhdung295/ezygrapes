@@ -11,6 +11,10 @@ export default `
   align-items: center;
   position: relative;
   z-index: 2;
+  visibility: visible;
+  height: auto;
+  width: 100%;
+  overflow: visible;
 }
 
 .swiper.card-swiper-custom {
@@ -81,7 +85,10 @@ export default `
 
 @media (max-width: 480px) {
   .slider-wrapper-desktop {
-    display: none;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    width: 0;
   }
 
   .swiper.card-swiper-custom {
