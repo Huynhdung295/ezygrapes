@@ -1,4 +1,4 @@
-import genHtml from '../utils/genHtml';
+import genHtml from '../utils/gen-html';
 
 export default (editor, config) => {
   return {
