@@ -8,8 +8,10 @@ export default (editor) => {
       defaults: {
         name: 'Card Slide',
         tagName: 'a',
-        draggable: true,
-        droppable: true,
+        draggable: false,
+        droppable: false,
+        // copyable: false,
+        // pastable: false,
         traits: [
           {
             type: 'text',
@@ -109,6 +111,10 @@ export default (editor) => {
     extend: 'image',
     model: {
       defaults: {
+        // copyable: false,
+        // pastable: false,
+        draggable: false,
+        droppable: false,
         traits: [
           {
             type: 'text',
@@ -127,5 +133,202 @@ export default (editor) => {
         ],
       },
     },
+  });
+
+  editor.Commands.add('core:component-delete', {
+    run(editor, sender, options) {
+      const selected = editor.getSelected();
+      if (!selected) return;
+
+      let target = selected;
+
+      if (selected.is('image')) {
+        const parent = selected.parent();
+        if (parent && parent.is('card-slider-slide')) {
+          target = parent;
+        }
+      }
+
+      let containerToDelete = target;
+      const parent = target.parent();
+      if (!parent) return;
+
+      const isDesktop = !!parent.closest('.slider-wrapper-desktop');
+      const isMobile = !!parent.closest('.swiper-wrapper');
+
+      if (isMobile) {
+        alert('Please switch to desktop view to delete slides.');
+        return;
+      }
+
+      let slides = [];
+
+      if (isDesktop) {
+        slides = parent.components().filter((comp) => comp.is('card-slider-slide'));
+      }
+
+      if (slides.length <= 3) {
+        alert('You must keep at least 3 slides.');
+        return;
+      }
+
+      const idx = slides.indexOf(containerToDelete);
+      containerToDelete.remove();
+      const mobileWrapper = editor.getWrapper().find('.card-swiper-custom .swiper-wrapper')[0];
+      if (mobileWrapper) {
+        const mobileSlides = mobileWrapper.components().filter((comp) => comp.getClasses().includes('swiper-slide'));
+        const targetMobileSlide = mobileSlides[idx];
+        if (targetMobileSlide) {
+          targetMobileSlide.remove();
+        }
+      }
+    },
+  });
+
+  editor.Commands.add('core:paste', {
+    run(editor) {
+      const selected = editor.getSelected();
+      if (!selected) return;
+
+      let target = selected;
+
+      if (selected.is('image')) {
+        const parent = selected.parent();
+        if (parent && parent.is('card-slider-slide')) {
+          target = parent;
+        }
+      }
+
+      const parent = target.parent();
+      if (!parent) return;
+
+      const isDesktop = !!parent.closest('.slider-wrapper-desktop');
+      const isMobile = !!parent.closest('.swiper-wrapper');
+
+      if (isMobile) {
+        alert('Please switch to desktop view to add slides.');
+        return;
+      }
+
+      let slides = [];
+
+      if (isDesktop) {
+        slides = parent.components().filter((comp) => comp.is('card-slider-slide'));
+      }
+
+      if (slides.length >= 5) {
+        alert('You cannot add more than 5 slides.');
+        return;
+      }
+
+      if (target.is('card-slider-slide')) {
+        const cloned = target.clone();
+        parent.append(cloned);
+        editor.select(cloned);
+
+        const mobileWrapper = editor.getWrapper().find('.card-swiper-custom .swiper-wrapper')[0];
+        if (mobileWrapper) {
+          mobileWrapper.append({
+            tagName: 'div',
+            attributes: { class: 'swiper-slide' },
+            components: [
+              {
+                type: 'card-slider-slide',
+                attributes: cloned.getAttributes(),
+                components: cloned.components().map((child) => child.toJSON()),
+              },
+            ],
+          });
+        }
+      } else {
+        alert('Only card-slides or images inside slides can be pasted.');
+      }
+    },
+  });
+  function syncDesktopToMobile(editor) {
+    const desktopWrapper = editor.getWrapper().find('.slider-wrapper-desktop')[0];
+    const mobileWrapper = editor.getWrapper().find('.card-swiper-custom .swiper-wrapper')[0];
+    if (!desktopWrapper || !mobileWrapper) return;
+  
+    const desktopSlides = desktopWrapper.components().filter((comp) => comp.is('card-slider-slide'));
+    const mobileSlides = mobileWrapper.components().filter((comp) => comp.getClasses().includes('swiper-slide'));
+  
+    desktopSlides.forEach((desktopSlide, idx) => {
+      const mobileSlide = mobileSlides[idx];
+      if (!mobileSlide) return;
+  
+      const mobileLink = mobileSlide.components().filter((comp) => comp.is('card-slider-slide'))[0];
+      if (!mobileLink) return;
+  
+      const href = desktopSlide.get('href') || '';
+      const target = desktopSlide.get('target') || '_self';
+  
+      mobileLink.set('href', href);
+      mobileLink.set('target', target);
+      mobileLink.addAttributes({ href, target });
+  
+      const desktopImg = desktopSlide.components().filter((comp) => comp.is('image'))[0];
+      const mobileImg = mobileLink.components().filter((comp) => comp.is('image'))[0];
+  
+      if (desktopImg && mobileImg) {
+        const src = desktopImg.get('src') || '';
+        const alt = desktopImg.get('alt') || '';
+  
+        mobileImg.set('src', src);
+        mobileImg.set('alt', alt);
+        mobileImg.addAttributes({ src, alt });
+      }
+    });
+  }
+  function syncMobileToDesktop(editor) {
+    const mobileWrapper = editor.getWrapper().find('.card-swiper-custom .swiper-wrapper')[0];
+    const desktopWrapper = editor.getWrapper().find('.slider-wrapper-desktop')[0];
+    if (!mobileWrapper || !desktopWrapper) return;
+  
+    const mobileSlides = mobileWrapper.components().filter((comp) => comp.getClasses().includes('swiper-slide'));
+    const desktopSlides = desktopWrapper.components().filter((comp) => comp.is('card-slider-slide'));
+  
+    mobileSlides.forEach((mobileSlide, idx) => {
+      const desktopSlide = desktopSlides[idx];
+      if (!desktopSlide) return;
+  
+      const mobileLink = mobileSlide.components().filter((comp) => comp.is('card-slider-slide'))[0];
+      if (!mobileLink) return;
+  
+      const href = mobileLink.get('href') || '';
+      const target = mobileLink.get('target') || '_self';
+  
+      desktopSlide.set('href', href);
+      desktopSlide.set('target', target);
+      desktopSlide.addAttributes({ href, target });
+  
+      const mobileImg = mobileLink.components().filter((comp) => comp.is('image'))[0];
+      const desktopImg = desktopSlide.components().filter((comp) => comp.is('image'))[0];
+  
+      if (mobileImg && desktopImg) {
+        const src = mobileImg.get('src') || '';
+        const alt = mobileImg.get('alt') || '';
+  
+        desktopImg.set('src', src);
+        desktopImg.set('alt', alt);
+        desktopImg.addAttributes({ src, alt });
+      }
+    });
+  }
+  editor.on('component:update:attributes', (model) => {
+    if (!model) return;
+    if (!model.is('card-slider-slide') && !model.is('image')) return;
+
+    const parent = model.parent();
+    if (!parent) return;
+
+    const isDesktop = !!parent.closest('.slider-wrapper-desktop');
+    const isMobile = !!parent.closest('.swiper-wrapper');
+
+    if (isDesktop) {
+      syncDesktopToMobile(editor);
+    } else if (isMobile) {
+      syncMobileToDesktop(editor);
+    }
   });
 };
