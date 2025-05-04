@@ -10,8 +10,6 @@ export default (editor) => {
         tagName: 'a',
         draggable: false,
         droppable: false,
-        // copyable: false,
-        // pastable: false,
         traits: [
           {
             type: 'text',
