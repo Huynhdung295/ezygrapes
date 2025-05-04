@@ -32,7 +32,7 @@ export default (editor) => {
   };
 };
 
-function gi(html, css, js) {
+function generatePageFullHtml(html, css, js) {
   return `
     <!DOCTYPE html>
     <html lang="en">
