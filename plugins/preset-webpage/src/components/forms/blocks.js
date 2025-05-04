@@ -123,7 +123,7 @@ export default function (editor, opts = {}) {
 
   addBlock(typeCheckbox, {
     label: editor.I18n.t('checkbox'),
-    media: '<svg class="gjs-block-svg" viewBox="0 0 24 24"><path d="M10 17l-5-5 1.41-1.42L10 14.17l7.59-7.59L19 8m0-5H5c-1.11 0-2 .89-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5a2 2 0 0 0-2-2z"></path></svg>',
+    media: '<svg class="gjs-block-svg-checkbok" viewBox="0 0 24 24"><path d="M10 17l-5-5 1.41-1.42L10 14.17l7.59-7.59L19 8m0-5H5c-1.11 0-2 .89-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5a2 2 0 0 0-2-2z"></path></svg>',
     content: {
       tagName: 'div',
       attributes: { class: 'form-check' },
@@ -136,7 +136,7 @@ export default function (editor, opts = {}) {
 
   addBlock(typeRadio, {
     label: editor.I18n.t('form_radio'),
-    media: '<svg class="gjs-block-svg" viewBox="0 0 24 24"><path d="M12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8m0-18C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 5c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"></path></svg>',
+    media: '<svg class="gjs-block-svg-checkbok" viewBox="0 0 24 24"><path d="M12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8m0-18C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 5c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"></path></svg>',
     content: {
       tagName: 'div',
       attributes: { class: 'form-check' },

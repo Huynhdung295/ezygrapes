@@ -1,7 +1,8 @@
-$pfx: 'gjs-';
-$pfxam: $pfx + 'form-component';
-
-.#{$pfxam} {
+.gjs-form-component {
   align-items: center;
   justify-content: center;
+}
+
+.gjs-block-svg-checkbok {
+  width: 40px;
 }
