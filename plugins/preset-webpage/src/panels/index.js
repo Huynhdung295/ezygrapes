@@ -5,7 +5,6 @@ import {
   cmdDeviceTablet,
   cmdDeviceMobile,
   cmdClear,
-  cmdToggleBorder,
   cmdPreviewHtml,
 } from './../consts';
 
@@ -83,11 +82,6 @@ export default (editor, config) => {
           id: cmdClear,
           className: 'fas fa-trash',
           command: (e) => e.runCommand(cmdClear),
-        },
-        {
-          id: cmdToggleBorder,
-          className: 'fa-solid fa-border-none',
-          command: (e) => e.runCommand(cmdToggleBorder),
         },
       ],
     },
