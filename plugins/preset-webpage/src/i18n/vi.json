@@ -65,6 +65,7 @@
   "row_gap": "Khoảng cách hàng",
   "column_gap": "Khoảng cách cột",
   "card-slider": "Thẻ trượt",
+  "postcards": "Bưu thiếp",
   "errors": {
     "card_slider": {
       "mobile_add": "Vui lòng chuyển sang chế độ xem máy tính để thêm các slide.",

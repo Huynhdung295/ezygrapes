@@ -65,6 +65,7 @@
   "row_gap": "Row Gap",
   "column_gap": "Column Gap",
   "card-slider": "Card Slider",
+  "postcards": "Postcards",
   "errors": {
     "card_slider": {
       "mobile_add": "Please switch to desktop view to add slides.",
