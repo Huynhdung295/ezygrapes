@@ -1,6 +1,5 @@
 import editHtml from './edit-html';
 import openImport from './open-import';
-import toggleBorder from './toggle-border';
 import previewHtml from './preview-html';
 
 import {
@@ -10,7 +9,6 @@ import {
   cmdDeviceTablet,
   cmdDeviceMobile,
   cmdClear,
-  cmdToggleBorder,
   cmdPreviewHtml,
 } from './../consts';
 
@@ -24,6 +22,5 @@ export default (editor, config) => {
   cm.add(cmdDeviceTablet, (e) => e.setDevice('Tablet'));
   cm.add(cmdDeviceMobile, (e) => e.setDevice('Mobile portrait'));
   cm.add(cmdClear, (e) => confirm(txtConfirm) && e.runCommand('core:canvas-clear'));
-  cm.add(cmdToggleBorder, toggleBorder(editor, config));
   cm.add(cmdPreviewHtml, previewHtml(editor, config));
 };
